@@ -1,0 +1,6 @@
+# ansible-galaxy collection install kubernetes.core
+- name: Deploy ghost
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ghost_deploy_file}}"
+  

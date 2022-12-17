@@ -17,7 +17,15 @@ all:
   # APP variables
   ghost_ip: <GHOST_SERVICE_IP>     # Needs to be updated
   ghost_port: <GHOST_PORT>         # Needs to be updated
+  ghost_deploy_file: ghost-deployment.yml
 
+  # MYSQL variables
+  mysql_host: db
+  mysql_user: ghost
+  mysql_password: 12345
+  mysql_database: ghost-db
+  mysql_ctn_port: 3306
+  mysql_deploy_file: mysql-deployment.yml
+  mysql_pvc_file: mysql-pvc.yml
+  mysql_service_file: mysql-service.yml
 
-  # Additional variables
-  # ...
