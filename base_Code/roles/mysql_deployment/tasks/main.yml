@@ -1,22 +1,22 @@
 ---
 - name: Make dir
-  become: yes
   file:
-    path: /mnt/data
+    path: data
     state: directory
+    recurse: yes
     force: true
 - name: Persistent volume
   kubernetes.core.k8s:
     state: present
     src: persistent-volumes.yml
-- name: Deploy Mysql
-  kubernetes.core.k8s:
-    state: present
-    src: "{{ mysql_deploy_file }}"
 - name: Deploy mysql PVC
   kubernetes.core.k8s:
     state: present
     src: "{{ mysql_pvc_file }}"
+- name: Deploy Mysql
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ mysql_deploy_file }}"
 - name: Deploy mysql Service
   kubernetes.core.k8s:
     state: present

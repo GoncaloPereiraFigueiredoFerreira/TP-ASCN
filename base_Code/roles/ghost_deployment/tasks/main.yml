@@ -1,4 +1,7 @@
+---
+
 # ansible-galaxy collection install kubernetes.core
+# pip install kubernetes
 - name: Deploy ghost
   kubernetes.core.k8s:
     state: present
