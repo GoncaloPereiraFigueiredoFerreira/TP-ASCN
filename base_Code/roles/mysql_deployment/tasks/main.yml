@@ -1,14 +1,5 @@
 ---
-#- name: Make dir
-#  file:
-#    path: data
-#    state: directory
-#    recurse: yes
-#    force: true
-#- name: Persistent volume
-#  kubernetes.core.k8s:
-#    state: present
-#    src: persistent-volumes.yml
+
 - name: Deploy mysql PVC
   kubernetes.core.k8s:
     state: present

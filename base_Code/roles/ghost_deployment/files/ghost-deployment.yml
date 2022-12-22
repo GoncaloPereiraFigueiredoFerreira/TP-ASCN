@@ -28,10 +28,10 @@ spec:
         - name: database__connection__host
           value: mysql-service
         - name: database__connection__user
-          value: "{{ mysql_user }}"
+          value: ghost
         - name: database__connection__password
-          value: "{{ mysql_password }}"
+          value: passwordSegura
         - name: database__connection__database
-          value: "{{ mysql_database }}"
+          value: ghost-db
         ports:
         - containerPort: 2368

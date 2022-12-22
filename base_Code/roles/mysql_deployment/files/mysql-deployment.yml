@@ -26,11 +26,11 @@ spec:
         image: mysql:latest
         env: # The variables below could be set on a ConfigMap object
         - name: MYSQL_DATABASE
-          value: "{{ mysql_database }}"
+          value: ghost-db
         - name: MYSQL_USER
-          value: "{{ mysql_user }}"
+          value: "ghost"
         - name: MYSQL_PASSWORD
-          value: "{{ mysql_password }}" # Use Secret object in real usage
+          value: "passwordSegura" # Use Secret object in real usage
         - name: MYSQL_ALLOW_EMPTY_PASSWORD
           value: "true" 
         ports:

@@ -2,6 +2,31 @@
 
 # ansible-galaxy collection install kubernetes.core
 # pip install kubernetes
+
+- name: Search for all Pods labelled app=mysql
+  kubernetes.core.k8s_info:
+    namespace: default
+    kind: Pod
+    label_selectors:
+      - app = mysql
+  register: pod_list
+
+- name: Pause for 20 sec to build mysql
+  ansible.builtin.pause:
+    seconds: 20
+
+#- debug: pod_list
+
+- name: Wait for mysql pods become ready
+  shell: "kubectl wait --namespace=default --for=condition=Ready pods --selector app=mysql --timeout=600s"
+
+#- name: Second Task - Print the full output
+#  ansible.builtin.debug:
+#    msg: "{{ pod_list.resources.0.metadata.name }}"
+
+
+
+
 - name: Deploy ghost
   kubernetes.core.k8s:
     state: present
@@ -12,3 +37,15 @@
     state: present
     src: "{{ ghost_service_file }}"
   
+- name: Wait for ghost pods become ready
+  shell: "kubectl wait --namespace=default --for=condition=Ready pods --selector app=ghost --timeout=600s"
+
+- name: Pause for 20 sec to build ghst
+  ansible.builtin.pause:
+    seconds: 20
+
+- name: Create Ghost admin
+  kubernetes.core.k8s_exec:
+    namespace: default
+    pod: "{{ pod_list.resources.0.metadata.name }}"
+    command: mysql "{{ mysql_database }}" -e "update users set name='"{{ admin_user_name }}"', password='"{{ admin_password }}"', email='"{{ admin_email }}"', status='active' where id=1"

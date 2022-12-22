@@ -1,4 +1,5 @@
 ---
+
 all:
  vars:
 
@@ -19,6 +20,11 @@ all:
   ghost_port: 30007         # Needs to be updated
   ghost_deploy_file: ghost-deployment.yml
   ghost_service_file: ghost-service.yml
+
+  #Ghost admin credentials
+  admin_email: ascn@example.com
+  admin_user_name: ascn
+  admin_password: \$2b\$10\$2OwDZbkgJ8kcnmxp1EKMmukrk1mVKQBh27oO6VgMCphPma43TtRoC
 
   # MYSQL variables
   mysql_host: mysql-service
