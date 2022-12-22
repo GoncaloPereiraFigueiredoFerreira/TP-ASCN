@@ -4,7 +4,7 @@
 # pip install kubernetes
 - name: Deploy ghost
   kubernetes.core.k8s:
-    state: present
+    state: absent
     src: "{{ghost_deploy_file}}"
 
 - name: Deploy ghost Service

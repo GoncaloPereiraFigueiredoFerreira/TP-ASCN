@@ -11,13 +11,13 @@
 #    src: persistent-volumes.yml
 - name: Deploy mysql PVC
   kubernetes.core.k8s:
-    state: present
+    state: absent
     src: "{{ mysql_pvc_file }}"
 - name: Deploy Mysql
   kubernetes.core.k8s:
-    state: present
+    state: absent
     src: "{{ mysql_deploy_file }}"
 - name: Deploy mysql Service
   kubernetes.core.k8s:
-    state: present
+    state: absent
     src: "{{ mysql_service_file }}"

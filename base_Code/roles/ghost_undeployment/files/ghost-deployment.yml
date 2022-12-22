@@ -22,11 +22,11 @@ spec:
         image: ghost
         env:
         - name: url
-          value: http://35.224.64.49:30007/
+          value: https://localhost
         - name: database__client
           value: mysql
         - name: database__connection__host
-          value: mysql-service
+          value: "{{ mysql_host }}"
         - name: database__connection__user
           value: "{{ mysql_user }}"
         - name: database__connection__password
@@ -34,4 +34,4 @@ spec:
         - name: database__connection__database
           value: "{{ mysql_database }}"
         ports:
-        - containerPort: 2368
+        - containerPort: 8000
