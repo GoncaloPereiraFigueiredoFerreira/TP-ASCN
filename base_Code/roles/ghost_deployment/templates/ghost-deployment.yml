@@ -22,7 +22,7 @@ spec:
         image: ghost
         env:
         - name: url
-          value: http://35.224.64.49:30007/
+          value: http://{{ node_list.resources.0.status.addresses.1.address }}:30007/
         - name: database__client
           value: mysql
         - name: database__connection__host

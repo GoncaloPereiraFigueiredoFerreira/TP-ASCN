@@ -11,9 +11,15 @@
       - app = mysql
   register: pod_list
 
-- name: Pause for 20 sec to build mysql
-  ansible.builtin.pause:
-    seconds: 20
+- name: Search for all Nodes
+  kubernetes.core.k8s_info:
+    namespace: default
+    kind: Node
+  register: node_list
+
+#- name: Pause for 20 sec to build mysql
+#  ansible.builtin.pause:
+#    seconds: 20
 
 #- debug: pod_list
 
@@ -22,18 +28,18 @@
 
 #- name: Second Task - Print the full output
 #  ansible.builtin.debug:
-#    msg: "{{ pod_list.resources.0.metadata.name }}"
+#    msg: "{{ node_list.resources.0.status.addresses.1.address }}"
 
 
 - name: Deploy ghost
   kubernetes.core.k8s:
     state: present
-    src: "{{ghost_deploy_file}}"
+    template: "{{ghost_deploy_file}}"
 
 - name: Deploy ghost Service
   kubernetes.core.k8s:
     state: present
-    src: "{{ ghost_service_file }}"
+    template: "{{ ghost_service_file }}"
   
 - name: Wait for ghost pods become ready
   shell: "kubectl wait --namespace=default --for=condition=Ready pods --selector app=ghost --timeout=600s"

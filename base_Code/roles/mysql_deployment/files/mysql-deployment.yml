@@ -42,3 +42,8 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
+      readinessProbe:
+      exec:
+        command:
+        - mysqladmin ping --silent
+      initialDelaySeconds: 5
