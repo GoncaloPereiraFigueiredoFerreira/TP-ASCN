@@ -1,14 +1,28 @@
 ---
+- name: Search for all Pods labelled app=mysql
+  kubernetes.core.k8s_info:
+    namespace: default
+    kind: Pod
+    label_selectors:
+      - app = mysql
+  register: pod_list
+
+- name: Search for all Nodes
+  kubernetes.core.k8s_info:
+    namespace: default
+    kind: Node
+  register: node_list
+
 
 # ansible-galaxy collection install kubernetes.core
 # pip install kubernetes
 - name: Deploy ghost
   kubernetes.core.k8s:
     state: absent
-    src: "{{ ghost_deploy_file }}"
+    template: "{{ ghost_deploy_file }}"
 
 - name: Deploy ghost Service
   kubernetes.core.k8s:
-    state: present
-    src: "{{ ghost_service_file }}"
+    state: absent
+    template: "{{ ghost_service_file }}"
   

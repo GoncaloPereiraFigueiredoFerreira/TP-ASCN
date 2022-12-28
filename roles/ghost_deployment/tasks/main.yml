@@ -44,12 +44,12 @@
 - name: Wait for ghost pods become ready
   shell: "kubectl wait --namespace=default --for=condition=Ready pods --selector app=ghost --timeout=600s"
 
-- name: Pause for 20 sec to build ghst
-  ansible.builtin.pause:
-    seconds: 20
+#- name: Pause for 20 sec to build ghst
+#  ansible.builtin.pause:
+#    seconds: 20
 
 - name: Create Ghost admin
   kubernetes.core.k8s_exec:
     namespace: default
     pod: "{{ pod_list.resources.0.metadata.name }}"
-    command: mysql "{{ mysql_database }}" -e "update users set name='"{{ admin_user_name }}"', password='"{{ admin_password }}"', email='"{{ admin_email }}"', status='active' where id=1"
+    command: mysql -h "{{ mysql_host }}" "{{ mysql_database }}" -e "update users set name='"{{ admin_user_name }}"', password='"{{ admin_password }}"', email='"{{ admin_email }}"', status='active' where id=1"

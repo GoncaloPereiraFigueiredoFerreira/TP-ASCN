@@ -35,3 +35,8 @@ spec:
           value: ghost-db
         ports:
         - containerPort: 2368
+      readinessProbe:
+      exec:
+        command:
+        - ping http://{{ node_list.resources.0.status.addresses.1.address }}:30007/
+      initialDelaySeconds: 5
