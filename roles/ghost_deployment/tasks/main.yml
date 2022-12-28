@@ -44,9 +44,9 @@
 - name: Wait for ghost pods become ready
   shell: "kubectl wait --namespace=default --for=condition=Ready pods --selector app=ghost --timeout=600s"
 
-#- name: Pause for 20 sec to build ghst
-#  ansible.builtin.pause:
-#    seconds: 20
+- name: Pause for 40 sec to build ghst
+  ansible.builtin.pause:
+    seconds: 40
 
 - name: Create Ghost admin
   kubernetes.core.k8s_exec:
