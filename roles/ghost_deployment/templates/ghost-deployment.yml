@@ -8,7 +8,9 @@ metadata:
   labels:
     app: ghost
 spec:
-  replicas: 1
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
   selector:
     matchLabels:
       app: ghost
@@ -22,7 +24,7 @@ spec:
         image: ghost
         env:
         - name: url
-          value: http://{{ node_list.resources.0.status.addresses.1.address }}:30007/
+          value: http://{{ ghost_ip }}:{{ ghost_port }}/
         - name: database__client
           value: mysql
         - name: database__connection__host
@@ -45,7 +47,7 @@ spec:
         ports:
         - containerPort: 2368
       readinessProbe:
-      exec:
-        command:
-        - ping http://{{ node_list.resources.0.status.addresses.1.address }}:30007/
+      #exec:
+        #command:
+        #- ping http://{{ ghost_ip }}:30007/
       initialDelaySeconds: 5

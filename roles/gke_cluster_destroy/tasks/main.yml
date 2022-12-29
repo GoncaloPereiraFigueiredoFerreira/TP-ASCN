@@ -28,3 +28,6 @@
     that:
     - '''ascn-cluster'' not in "{{ results[''resources''] | map(attribute=''name'')
       | list }}"'
+
+- name: destroy Static ip
+  shell: gcloud compute addresses delete helloweb-ip --region "{{ gcp_region }}" 
