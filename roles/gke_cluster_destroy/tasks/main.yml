@@ -30,4 +30,5 @@
       | list }}"'
 
 - name: destroy Static ip
-  shell: gcloud compute addresses delete helloweb-ip --region "{{ gcp_region }}" 
+  shell: gcloud compute addresses delete helloweb-ip --region {{ gcp_region }}
+  ignore_errors: true

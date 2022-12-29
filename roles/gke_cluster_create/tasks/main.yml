@@ -41,19 +41,3 @@
     auth_kind: "{{ gcp_auth_kind }}"
     service_account_file: "{{ gcp_cred_file }}"
     state: present
-
-- name: Connect to the cluster (update kubeconfig)"
-  shell: gcloud container clusters get-credentials  --project="{{ gcp_project}}"  --zone="{{ gcp_zone }}"  ascn-cluster
-
-- name: Create Static ip
-  shell: gcloud compute addresses create helloweb-ip --region {{ gcp_region }} 
-
-- name: get Static ip
-  shell: gcloud compute addresses describe helloweb-ip --region {{ gcp_region }} | grep -P -o --regexp="([0-9]{1,3}\.){3}[0-9]{1,3}"
-  register: result
-
-- name: Replace old hostname with new hostname
-  ansible.builtin.replace:
-    path: inventory/gcp.yml
-    regexp: 'ghost_ip: "(?:[0-9]{1,3}\.){3}[0-9]{1,3}"'
-    replace: 'ghost_ip: "{{ result.stdout }}"'

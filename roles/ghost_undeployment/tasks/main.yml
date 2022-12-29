@@ -1,28 +1,19 @@
 ---
-- name: Search for all Pods labelled app=mysql
-  kubernetes.core.k8s_info:
-    namespace: default
-    kind: Pod
-    label_selectors:
-      - app = mysql
-  register: pod_list
-
-- name: Search for all Nodes
-  kubernetes.core.k8s_info:
-    namespace: default
-    kind: Node
-  register: node_list
-
 
 # ansible-galaxy collection install kubernetes.core
 # pip install kubernetes
-- name: Deploy ghost
+
+- name: destroy Static ip
+  shell: gcloud compute addresses delete helloweb-ip --region {{ gcp_region }}
+
+- name: Destroy ghost
   kubernetes.core.k8s:
     state: absent
     template: "{{ ghost_deploy_file }}"
+    wait: true
 
-- name: Deploy ghost Service
+- name: Destroy ghost Service
   kubernetes.core.k8s:
     state: absent
     template: "{{ ghost_service_file }}"
-  
+    wait: true  
