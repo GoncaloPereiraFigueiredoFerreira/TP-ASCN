@@ -1,7 +1,6 @@
 ---
-
-# ansible-galaxy collection install kubernetes.core
-# pip install kubernetes
+- name: Load variables from file
+  include_vars: vault_file
 
 - name: Create Static ip
   shell: gcloud compute addresses create helloweb-ip --region {{ gcp_region }} 
@@ -49,7 +48,7 @@
   register: result
   until: result.status == 200
   retries: 5
-  delay: 10
+  delay: 15
 
 - name: Create Ghost admin
   kubernetes.core.k8s_exec:

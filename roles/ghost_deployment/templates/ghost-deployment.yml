@@ -40,9 +40,9 @@ spec:
         - name: mail__options__service
           value: "Mailgun"
         - name: mail__options__auth__user
-          value: postmaster@sandboxb62ae82c262f477fb1ad1320e761a8ea.mailgun.org
+          value: "{{ mail_user }}"
         - name: mail__options__auth__pass
-          value: 3d08ebd3b993e51da4a3d173429f6910-c2efc90c-a1931bed
+          value: "{{ mail_pass }}"
 
         ports:
         - containerPort: 2368

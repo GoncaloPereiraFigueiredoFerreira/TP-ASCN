@@ -17,7 +17,7 @@ all:
 
 
   # APP variables
-  ghost_ip: "34.172.157.30"    # Needs to be updated
+  ghost_ip: "35.225.55.93"    # Needs to be updated
   ghost_port: 80         # Needs to be updated
   ghost_deploy_file: ghost-deployment.yml
   ghost_service_file: ghost-service.yml
