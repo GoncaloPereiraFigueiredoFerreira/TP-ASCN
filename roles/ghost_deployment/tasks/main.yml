@@ -39,6 +39,7 @@
     state: present
     template: "{{ghost_deploy_file}}"
     wait: true
+    wait_timeout: 6000
 
 - name: Check that you can connect (GET) to Ghost and it returns a status 200
   ansible.builtin.uri:

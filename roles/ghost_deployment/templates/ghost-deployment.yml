@@ -10,7 +10,7 @@ metadata:
 spec:
   minReplicas: 1
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 50
+  targetCPUUtilizationPercentage: 15
   selector:
     matchLabels:
       app: ghost
