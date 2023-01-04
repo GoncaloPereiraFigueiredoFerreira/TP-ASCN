@@ -49,7 +49,7 @@
   register: result
   until: result.status == 200
   retries: 5
-  delay: 15
+  delay: 20
 
 - name: Create Ghost admin
   kubernetes.core.k8s_exec:
