@@ -62,3 +62,19 @@
     namespace: default
     pod: "{{ pod_list.resources.0.metadata.name }}"
     command: mysql "{{ mysql_database }}" -e "update users set name='"{{ admin_user_name }}"', password='"{{ admin_password }}"', email='"{{ admin_email }}"', status='active' where id=1"
+
+#- name: python code that opens a web browser with the ghost app
+#  command: /usr/bin/python3
+#  args:
+#    stdin: |
+#      import webbrowser
+#      webbrowser.open("http://{{ ghost_ip }}:{{ghost_port}}/")
+#- name: Create Dashboard
+#  shell: gcloud monitoring dashboards create --config-from-file monitoring_Dashboard.json --project "{{ gcp_project }}"
+
+#- name: python code that opens a web browser with the metrics
+#  command: /usr/bin/python3
+#  args:
+#    stdin: |
+#      import webbrowser
+#      webbrowser.open("http://{{ ghost_ip }}:{{ghost_port}}/")
