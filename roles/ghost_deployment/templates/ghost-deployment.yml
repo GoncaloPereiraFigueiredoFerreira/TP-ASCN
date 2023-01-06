@@ -8,9 +8,6 @@ metadata:
   labels:
     app: ghost
 spec:
-  minReplicas: 1
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 15
   selector:
     matchLabels:
       app: ghost
@@ -44,10 +41,11 @@ spec:
         - name: mail__options__auth__pass
           value: "{{ mail_pass }}"
 
+        resources:
+            # You must specify requests for CPU to autoscale
+            # based on CPU utilization
+            requests:
+              cpu: "250m"
+
         ports:
         - containerPort: 2368
-      readinessProbe:
-      #exec:
-        #command:
-        #- ping http://{{ ghost_ip }}:30007/
-      initialDelaySeconds: 5

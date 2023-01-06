@@ -5,6 +5,7 @@
 
 - name: destroy Static ip
   shell: gcloud compute addresses delete helloweb-ip --region {{ gcp_region }}
+  ignore_errors: true
 
 - name: Destroy ghost
   kubernetes.core.k8s:
@@ -16,4 +17,10 @@
   kubernetes.core.k8s:
     state: absent
     template: "{{ ghost_service_file }}"
+    wait: true  
+
+- name: Destroy ghost hpa
+  kubernetes.core.k8s:
+    state: absent
+    template: "{{ghost_hpa_file}}"
     wait: true  

@@ -4,6 +4,7 @@
 
 - name: Create Static ip
   shell: gcloud compute addresses create helloweb-ip --region {{ gcp_region }} 
+  ignore_errors: true
 
 - name: get Static ip
   shell: gcloud compute addresses describe helloweb-ip --region {{ gcp_region }} | grep -P -o --regexp="([0-9]{1,3}\.){3}[0-9]{1,3}"
@@ -50,6 +51,11 @@
   until: result.status == 200
   retries: 5
   delay: 20
+
+- name: Deploy ghost hpa
+  kubernetes.core.k8s:
+    state: present
+    template: "{{ghost_hpa_file}}"  
 
 - name: Create Ghost admin
   kubernetes.core.k8s_exec:
