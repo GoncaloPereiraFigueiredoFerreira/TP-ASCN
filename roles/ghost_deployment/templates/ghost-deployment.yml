@@ -25,13 +25,13 @@ spec:
         - name: database__client
           value: mysql
         - name: database__connection__host
-          value: mysql-service
+          value: {{mysql_host}}
         - name: database__connection__user
-          value: ghost
+          value: {{mysql_user}}
         - name: database__connection__password
-          value: passwordSegura
+          value: {{mysql_password}}
         - name: database__connection__database
-          value: ghost-db
+          value: {{mysql_database}}
         - name: mail__transport
           value: "SMTP"
         - name: mail__options__service
@@ -42,8 +42,6 @@ spec:
           value: "{{ mail_pass }}"
 
         resources:
-            # You must specify requests for CPU to autoscale
-            # based on CPU utilization
             requests:
               cpu: "250m"
 

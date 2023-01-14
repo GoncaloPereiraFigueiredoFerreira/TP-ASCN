@@ -25,16 +25,16 @@ spec:
       - name: mysql
         image: mysql:latest
         env: # The variables below could be set on a ConfigMap object
-        - name: MYSQL_HOST
-          value: "{{ mysql_host }}"
         - name: MYSQL_DATABASE
-          value: "{{ mysql_database }}"
+          value: {{ mysql_database }}
         - name: MYSQL_USER
           value: "{{ mysql_user }}"
         - name: MYSQL_PASSWORD
-          value: "{{ mysql_password }}" # Use Secret object in real usage
+          value: "{{ mysql_password }}" 
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: "true" 
         ports:
-        - containerPort: 3306
+        - containerPort: {{ mysql_ctn_port }}
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
@@ -42,3 +42,8 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
+      readinessProbe:
+      exec:
+        command:
+        - mysqladmin ping --silent
+      initialDelaySeconds: 5

@@ -3,12 +3,12 @@
 - name: Deploy mysql PVC
   kubernetes.core.k8s:
     state: present
-    src: "{{ mysql_pvc_file }}"
+    template: "{{ mysql_pvc_file }}"
 - name: Deploy Mysql
   kubernetes.core.k8s:
     state: present
-    src: "{{ mysql_deploy_file }}"
+    template: "{{ mysql_deploy_file }}"
 - name: Deploy mysql Service
   kubernetes.core.k8s:
     state: present
-    src: "{{ mysql_service_file }}"
+    template: "{{ mysql_service_file }}"

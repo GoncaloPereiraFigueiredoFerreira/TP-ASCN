@@ -26,15 +26,15 @@ spec:
         image: mysql:latest
         env: # The variables below could be set on a ConfigMap object
         - name: MYSQL_DATABASE
-          value: ghost-db
+          value: {{ mysql_database }}
         - name: MYSQL_USER
-          value: "ghost"
+          value: "{{ mysql_user }}"
         - name: MYSQL_PASSWORD
-          value: "passwordSegura" # Use Secret object in real usage
+          value: "{{ mysql_password }}" 
         - name: MYSQL_ALLOW_EMPTY_PASSWORD
           value: "true" 
         ports:
-        - containerPort: 3306
+        - containerPort: {{ mysql_ctn_port }}
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql

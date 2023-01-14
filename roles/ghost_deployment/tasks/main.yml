@@ -72,7 +72,7 @@
       webbrowser.open("http://{{ ghost_ip }}:{{ghost_port}}/")
 
 - name: Create Dashboard
-  shell: gcloud monitoring dashboards list --project={{ gcp_project }} --filter="displayName={{ ghost_dashboard }}" | grep "name:" || gcloud monitoring dashboards create --config-from-file monitoring_Dashboard.json --project "{{ gcp_project }}"
+  shell: gcloud monitoring dashboards list --project={{ gcp_project }} --filter="displayName={{ ghost_dashboard }}" | grep "name:" || gcloud monitoring dashboards create --config-from-file dashboards/monitoring_Dashboard.json --project "{{ gcp_project }}"
 
 - name: python code that opens a web browser with the metrics
   command: /usr/bin/python3
