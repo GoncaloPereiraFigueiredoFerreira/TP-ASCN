@@ -16,7 +16,7 @@ all:
   gcp_initial_node_count: 4            # Number of nodes to create. Can be changed if necessary
 
   # APP variables
-  ghost_ip: "35.202.225.248"    
+  ghost_ip: "34.71.208.30"    
   ghost_port: 80         
   ghost_deploy_file: ghost-deployment.yml
   ghost_service_file: ghost-service.yml

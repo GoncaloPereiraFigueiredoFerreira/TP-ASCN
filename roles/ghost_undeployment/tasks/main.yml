@@ -3,6 +3,9 @@
 # ansible-galaxy collection install kubernetes.core
 # pip install kubernetes
 
+- name: Load variables from file
+  include_vars: vault_file
+
 - name: destroy Static ip
   shell: gcloud compute addresses delete helloweb-ip --region {{ gcp_region }}
   ignore_errors: true
