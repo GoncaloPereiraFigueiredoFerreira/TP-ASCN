@@ -1,5 +1,5 @@
 {
-  "displayName": "Ghost's Deployment Dashboard",
+  "displayName": "Ghosts Deployment Dashboard",
   "gridLayout": {
     "columns": "2",
     "widgets": [
@@ -172,18 +172,18 @@
       {
         "scorecard": {
           "gaugeView": {
-            "upperBound": 1.0
+            "upperBound": 2.0
           },
           "thresholds": [
             {
               "color": "RED",
               "direction": "ABOVE",
-              "value": 70.0
+              "value": 0.7
             },
             {
               "color": "YELLOW",
               "direction": "ABOVE",
-              "value": 60.0
+              "value": 0.5
             }
           ],
           "timeSeriesQuery": {
@@ -193,11 +193,11 @@
                 "crossSeriesReducer": "REDUCE_MEAN",
                 "perSeriesAligner": "ALIGN_MEAN"
               },
-              "filter": "metric.type=\"kubernetes.io/container/cpu/limit_utilization\" resource.type=\"k8s_container\" resource.label.\"cluster_name\"=\"ascn-cluster\""
+              "filter": "metric.type=\"compute.googleapis.com/instance/cpu/utilization\" resource.type=\"gce_instance\""
             }
           }
         },
-        "title": "Kubernetes Container - CPU limit utilization for ascn-cluster [MEAN]"
+        "title": "VM Instance - CPU utilization [MEAN]"
       },
       {
         "logsPanel": {
@@ -205,39 +205,7 @@
             "projects/702347997714"
           ]
         },
-        "title": "Untitled logs panel"
-      },
-      {
-        "title": "Kubernetes Container - CPU request utilization [MEAN]",
-        "xyChart": {
-          "chartOptions": {
-            "mode": "COLOR"
-          },
-          "dataSets": [
-            {
-              "minAlignmentPeriod": "60s",
-              "plotType": "LINE",
-              "targetAxis": "Y1",
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "60s",
-                    "perSeriesAligner": "ALIGN_MEAN"
-                  },
-                  "filter": "metric.type=\"kubernetes.io/container/cpu/request_utilization\" resource.type=\"k8s_container\"",
-                  "secondaryAggregation": {
-                    "alignmentPeriod": "60s"
-                  }
-                }
-              }
-            }
-          ],
-          "timeshiftDuration": "0s",
-          "yAxis": {
-            "label": "y1Axis",
-            "scale": "LINEAR"
-          }
-        }
+        "title": "Project Logs"
       },
       {
         "title": "Kubernetes Container - CPU usage time for default [MEAN]",
@@ -271,7 +239,70 @@
             "scale": "LINEAR"
           }
         }
+      },
+      {
+        "timeSeriesTable": {
+          "dataSets": [
+            {
+              "minAlignmentPeriod": "60s",
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "aggregation": {
+                    "alignmentPeriod": "60s",
+                    "perSeriesAligner": "ALIGN_MEAN"
+                  },
+                  "filter": "metric.type=\"compute.googleapis.com/instance/cpu/utilization\" resource.type=\"gce_instance\"",
+                  "pickTimeSeriesFilter": {
+                    "direction": "TOP",
+                    "numTimeSeries": 300,
+                    "rankingMethod": "METHOD_MEAN"
+                  },
+                  "secondaryAggregation": {
+                    "alignmentPeriod": "60s"
+                  }
+                }
+              }
+            }
+          ],
+          "metricVisualization": "BAR"
+        },
+        "title": "VM Instance - CPU utilization [MEAN]"
+      },
+      {
+        "timeSeriesTable": {
+          "columnSettings": [
+            {
+              "column": "pod_name",
+              "visible": true
+            },
+            {
+              "column": "container_name",
+              "visible": true
+            }
+          ],
+          "dataSets": [
+            {
+              "minAlignmentPeriod": "60s",
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "aggregation": {
+                    "alignmentPeriod": "60s",
+                    "perSeriesAligner": "ALIGN_RATE"
+                  },
+                  "filter": "metric.type=\"kubernetes.io/container/cpu/core_usage_time\" resource.type=\"k8s_container\" resource.label.\"namespace_name\"=\"default\"",
+                  "secondaryAggregation": {
+                    "alignmentPeriod": "60s",
+                    "perSeriesAligner": "ALIGN_MEAN"
+                  }
+                }
+              }
+            }
+          ],
+          "metricVisualization": "NUMBER"
+        },
+        "title": "Kubernetes Container - CPU usage time for default [MEAN]"
       }
     ]
-  }
+  },
+  "name": "projects/702347997714/dashboards/8d45202c-c551-48ba-b5e9-c3d2819fbab9"
 }
