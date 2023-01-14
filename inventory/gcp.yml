@@ -17,7 +17,7 @@ all:
 
 
   # APP variables
-  ghost_ip: "34.123.242.226"    # Needs to be updated
+  ghost_ip: "35.202.225.248"    # Needs to be updated
   ghost_port: 80         # Needs to be updated
   ghost_deploy_file: ghost-deployment.yml
   ghost_service_file: ghost-service.yml
@@ -37,4 +37,8 @@ all:
   mysql_deploy_file: mysql-deployment.yml
   mysql_pvc_file: mysql-pvc.yml
   mysql_service_file: mysql-service.yml
+
+  #Path to JMeter # Needs to be changed
+  jmeter_path: home/ganso133/things/apache-jmeter-5.5/bin/jmeter
+
 
