@@ -1,8 +1,0 @@
----
-# Playbook to load the ghost aplication
-
-- name: Tests
-  hosts: localhost
-  gather_facts: true
-  roles:
-    - { role: load_ghost }
